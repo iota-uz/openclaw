@@ -29,7 +29,18 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
     && rm -rf /var/lib/apt/lists/*
 
 # Install OpenClaw
-RUN npm install -g openclaw@latest
+RUN npm install -g openclaw@2026.2.13
+
+# Install Claude Code
+RUN npm install -g @anthropic-ai/claude-code@2.1.42
+
+# Install Playwright CLI + Chromium with system deps + skills
+RUN npm install -g @playwright/cli@0.1.0 \
+    && npx playwright install chromium --with-deps \
+    && playwright-cli install --skills
+
+# Create Claude Code config directory for node user
+RUN mkdir -p /home/node/.claude && chown -R node:node /home/node/.claude
 
 # Copy config and entrypoint
 COPY config/ /opt/openclaw-config/

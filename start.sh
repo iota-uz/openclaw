@@ -25,6 +25,11 @@ if [ -n "${GH_TOKEN:-}" ]; then
     gosu node bash -c "echo '$GH_TOKEN' | gh auth login --with-token 2>/dev/null || true"
 fi
 
+# Claude Code: CLAUDE_CODE_OAUTH_TOKEN is read directly by claude CLI
+if [ -n "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]; then
+    echo "[openclaw] Claude Code OAuth token detected."
+fi
+
 echo "[openclaw] Starting gateway on ${OPENCLAW_GATEWAY_HOST}:${OPENCLAW_GATEWAY_PORT}"
 
 # Drop to node user and start gateway

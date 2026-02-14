@@ -26,6 +26,8 @@ This repo is a **Railway deployment template** for [OpenClaw](https://openclaw.a
 ## Repository Structure
 
 ```
+├── .github/workflows/
+│   └── deploy.yml          # GitHub Actions: validate → deploy to Railway
 ├── Dockerfile              # node:22-bookworm image with openclaw + dev tools
 ├── railway.toml            # Railway build/deploy configuration
 ├── start.sh                # Entrypoint: volume perms → first-boot seed → gateway launch
@@ -45,6 +47,7 @@ This repo is a **Railway deployment template** for [OpenClaw](https://openclaw.a
 
 | File | Purpose | When it changes |
 |---|---|---|
+| `.github/workflows/deploy.yml` | CI/CD — validate then deploy to Railway | Changing deploy pipeline |
 | `Dockerfile` | Image build — openclaw install, dev tools, gh CLI | Adding/removing tools |
 | `start.sh` | Runtime entrypoint — boot logic, env mapping | Changing startup behavior |
 | `config/openclaw.json` | Channel config, model selection, auth | Adding channels, changing model, updating allowlists |
@@ -56,6 +59,7 @@ This repo is a **Railway deployment template** for [OpenClaw](https://openclaw.a
 
 ## How It Works
 
+1. **CI:** Push to `main` triggers GitHub Actions — validates Dockerfile, shell, and JSON, then deploys
 1. **Build:** Railway builds the Docker image from `Dockerfile`
 2. **First boot:** `start.sh` detects no config on the volume, copies `config/*` → `/home/node/.openclaw/`
 3. **Subsequent boots:** Existing volume config is preserved — redeploys don't overwrite
