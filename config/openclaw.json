@@ -3,53 +3,63 @@
   "gateway": {
     "bind": "lan",
     "auth": {
+      "mode": "password",
       "token": "${OPENCLAW_GATEWAY_TOKEN}"
     },
-    "webui": {
-      "enabled": true,
-      "auth": {
-        "username": "${AUTH_USERNAME}",
-        "password": "${AUTH_PASSWORD}"
-      }
+    "controlUi": {
+      "enabled": true
+    }
+  },
+  "env": {
+    "vars": {
+      "OPENROUTER_API_KEY": "${OPENROUTER_API_KEY}"
     }
   },
   "channels": {
     "discord": {
       "enabled": true,
       "token": "${DISCORD_BOT_TOKEN}",
-      "policy": "allowlist",
-      "requireMention": true,
-      "guilds": {
-        "YOUR_DISCORD_GUILD_ID": {
-          "enabled": true,
-          "channels": []
-        }
-      },
-      "dmAllowlist": [
+      "dmPolicy": "allowlist",
+      "allowFrom": [
         "YOUR_DISCORD_USER_ID_1",
         "YOUR_DISCORD_USER_ID_2"
-      ]
+      ],
+      "guilds": {
+        "YOUR_DISCORD_GUILD_ID": {
+          "slug": "iota",
+          "requireMention": true,
+          "channels": {}
+        }
+      }
     },
     "telegram": {
       "enabled": true,
-      "token": "${TELEGRAM_BOT_TOKEN}",
-      "policy": "allowlist",
-      "requireMention": true,
-      "groups": [
-        "YOUR_TELEGRAM_GROUP_CHAT_ID"
-      ],
-      "dmAllowlist": [
+      "botToken": "${TELEGRAM_BOT_TOKEN}",
+      "dmPolicy": "allowlist",
+      "allowFrom": [
         "YOUR_TELEGRAM_USER_ID_1",
         "YOUR_TELEGRAM_USER_ID_2"
-      ]
+      ],
+      "groups": {
+        "YOUR_TELEGRAM_GROUP_CHAT_ID": {
+          "requireMention": true
+        }
+      }
     }
   },
   "agents": {
-    "default": {
-      "provider": "openrouter",
-      "model": "openrouter/auto",
-      "apiKey": "${OPENROUTER_API_KEY}",
-      "systemPromptFiles": ["SOUL.md", "USER.md", "AGENTS.md"]
-    }
+    "defaults": {
+      "workspace": "~/.openclaw/workspace",
+      "model": {
+        "primary": "openrouter/auto"
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "default": true,
+        "name": "Tolib"
+      }
+    ]
   }
 }
