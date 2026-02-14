@@ -1,6 +1,7 @@
 {
   "$schema": "https://openclaw.ai/schema/config.json",
   "gateway": {
+    "mode": "local",
     "bind": "lan",
     "auth": {
       "mode": "password",
@@ -19,11 +20,13 @@
     "discord": {
       "enabled": true,
       "token": "${DISCORD_BOT_TOKEN}",
-      "dmPolicy": "allowlist",
-      "allowFrom": [
-        "YOUR_DISCORD_USER_ID_1",
-        "YOUR_DISCORD_USER_ID_2"
-      ],
+      "dm": {
+        "enabled": true,
+        "allowFrom": [
+          "YOUR_DISCORD_USER_ID_1",
+          "YOUR_DISCORD_USER_ID_2"
+        ]
+      },
       "guilds": {
         "YOUR_DISCORD_GUILD_ID": {
           "slug": "iota",
