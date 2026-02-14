@@ -16,26 +16,17 @@ Edit `config/openclaw.json` and fill in:
 - Discord Guild ID and user allowlist IDs
 - Telegram group chat IDs and user allowlist IDs
 
-### 3. Set Up Railway
+### 3. Deploy to Railway
 
 1. Create a new project on [Railway](https://railway.com)
-2. Add a **service** (empty — GitHub Actions will deploy to it)
+2. Connect the `iota-uz/openclaw` GitHub repo
 3. Add a **volume**:
    - Name: `openclaw-data`
    - Mount path: `/home/node/.openclaw`
-4. Set **environment variables** in Railway dashboard (see below)
+4. Set **environment variables** (see below)
+5. Push to `main` — Railway auto-deploys via GitHub webhook
 
-### 4. Set Up GitHub Actions
-
-1. In Railway: project **Settings → Tokens → Create token** (project-scoped)
-2. In GitHub: repo **Settings → Secrets → Actions**, add:
-   - `RAILWAY_TOKEN` — the project token from step 1
-3. In GitHub: repo **Settings → Variables → Actions**, add:
-   - `RAILWAY_SERVICE_ID` — your Railway service ID (from service settings URL)
-4. **Disable Railway auto-deploy**: project Settings → Disable GitHub trigger (Actions handles it now)
-5. Push to `main` — GitHub Actions validates and deploys
-
-### 5. Set Environment Variables
+### 4. Set Environment Variables
 
 | Variable | Required | Description |
 |---|---|---|
