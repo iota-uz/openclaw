@@ -33,7 +33,7 @@ Edit `config/openclaw.json` and fill in:
 | `OPENROUTER_API_KEY` | Yes | OpenRouter API key |
 | `DISCORD_BOT_TOKEN` | Yes | Discord bot token |
 | `TELEGRAM_BOT_TOKEN` | Yes | Telegram bot token |
-| `OPENCLAW_GATEWAY_TOKEN` | Yes | Gateway auth token (`openssl rand -hex 32`) |
+| `OPENCLAW_GATEWAY_PASSWORD` | Yes | Gateway auth password (`openssl rand -hex 32`) |
 | `GH_TOKEN` | Yes | GitHub PAT scoped to `iota-uz` org |
 | `AUTH_USERNAME` | Recommended | WebUI login username |
 | `AUTH_PASSWORD` | Recommended | WebUI login password |
